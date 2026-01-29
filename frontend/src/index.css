@@ -7,11 +7,12 @@
 .dashboard-main {
   flex: 1;
   padding: 24px;
+  overflow-y: auto;
 }
+
 
 .page-title {
   margin: 10px 0 20px;
-  font-weight: 600;
 }
 
 .stats-grid {
@@ -23,7 +24,7 @@
 .quick-actions {
   display: flex;
   gap: 16px;
-  margin-top: 24px;
+  margin: 24px 0;
 }
 
 .action-card {
@@ -31,5 +32,29 @@
   padding: 20px;
   border-radius: 12px;
   width: 260px;
-  border: 1px solid #eee;
 }
+
+.card-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.create-task-form {
+  display: flex;
+  gap: 10px;
+}
+
+.create-task-form input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.logout-btn {
+  margin-top: 20px;
+}
+
+

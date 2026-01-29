@@ -2,6 +2,8 @@ import { useState } from "react";
 import api from "../services/api";
 import { useNavigate } from "react-router-dom";
 import illustration from "../assets/auth.jpg";
+import "./Auth.css";
+
 
 export default function Signup() {
   const [form, setForm] = useState({
@@ -112,62 +114,3 @@ const styles = {
     color: "#666",
   },
 };
-
-
-
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import api from "../services/api";
-// import illustration from "../assets/auth.jpg";
-
-// export default function Signup() {
-//   const [form, setForm] = useState({
-//     name: "",
-//     email: "",
-//     password: "",
-//   });
-
-//   const navigate = useNavigate();
-
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     await api.post("/auth/signup", form);
-//     navigate("/role");
-//   };
-
-//   return (
-//     <div className="auth-container">
-//       <div className="auth-left">
-//         <img src={illustration} alt="auth" />
-//       </div>
-
-//       <div className="auth-right">
-//         <form className="auth-card" onSubmit={handleSubmit}>
-//           <h2>Create your account</h2>
-//           <p>Get started with task management in seconds.</p>
-
-//           <label>Full name</label>
-//           <input onChange={(e) => setForm({ ...form, name: e.target.value })} />
-
-//           <label>Email address</label>
-//           <input onChange={(e) => setForm({ ...form, email: e.target.value })} />
-
-//           <label>Password</label>
-//           <input
-//             type="password"
-//             onChange={(e) =>
-//               setForm({ ...form, password: e.target.value })
-//             }
-//           />
-
-//           <button className="primary-btn">Create Account</button>
-
-//           <div className="link">
-//             Already have an account?{" "}
-//             <span onClick={() => navigate("/login")}>Login</span>
-//           </div>
-//         </form>
-//       </div>
-//     </div>
-//   );
-// }

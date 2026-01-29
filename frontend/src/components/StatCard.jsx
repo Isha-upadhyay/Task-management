@@ -1,17 +1,40 @@
 export default function StatCard({ title, count, color }) {
   return (
-    <div style={{ ...styles.card, borderLeft: `4px solid ${color}` }}>
-      <h4>{title}</h4>
-      <h2>{count}</h2>
+    <div style={styles.card}>
+      <div style={{ ...styles.bar, background: color }} />
+      <p style={styles.title}>{title}</p>
+      <h2 style={styles.count}>{count}</h2>
     </div>
+
+    
   );
 }
 
 const styles = {
+    
   card: {
     background: "#fff",
-    padding: "15px",
-    width: "200px",
-    boxShadow: "0 0 5px rgba(0,0,0,0.1)",
+    borderRadius: "14px",
+    padding: "16px",
+    position: "relative",
+    overflow: "hidden",
+  },
+  bar: {
+    height: "40px",
+    width: "100%",
+    borderRadius: "6px",
+    marginBottom: "10px",
+    opacity: 0.9,
+  },
+  title: {
+    fontSize: "12px",
+    color: "#777",
+  },
+  count: {
+    fontSize: "22px",
+    fontWeight: 600,
   },
 };
+
+
+

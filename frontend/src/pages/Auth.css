@@ -1,0 +1,121 @@
+/* ===== AUTH LAYOUT ===== */
+.auth-container {
+  display: flex;
+  height: 100vh;
+  background: #3f3f3f; /* dark outer bg like screenshot */
+}
+
+.auth-left {
+  flex: 1;
+  background: #e7e9ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-left img {
+  width: 80%;
+  max-width: 420px;
+}
+
+.auth-right {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== AUTH CARD ===== */
+.auth-card {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-card h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.auth-card p {
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 24px;
+}
+
+/* ===== FORM ===== */
+.auth-card label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.auth-card input,
+.auth-card select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  margin-bottom: 18px;
+  outline: none;
+}
+
+.auth-card input:focus,
+.auth-card select:focus {
+  border-color: #5b5bd6;
+}
+
+/* ===== BUTTON ===== */
+.primary-btn {
+  background: #5b5bd6;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 6px;
+}
+
+.primary-btn:hover {
+  background: #4a4ac4;
+}
+
+/* ===== LINK ===== */
+.link {
+  margin-top: 18px;
+  font-size: 13px;
+  color: #666;
+}
+
+.link span {
+  color: #5b5bd6;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* ===== SIGNUP ROLE DROPDOWN FIX ===== */
+.auth-card select {
+  appearance: none;
+  background: #fff;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .auth-container {
+    flex-direction: column;
+  }
+
+  .auth-left {
+    display: none;
+  }
+
+  .auth-right {
+    flex: none;
+    height: 100vh;
+  }
+}
