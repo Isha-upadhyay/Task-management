@@ -1,0 +1,77 @@
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const db = require("../config/firebase");
+
+// SIGNUP
+exports.signup = async (req, res) => {
+  try {
+    const { name, email, password, role } = req.body;
+
+    if (!name || !email || !password || !role) {
+      return res.status(400).json({ message: "All fields required" });
+    }
+
+    // check if user already exists
+    const userRef = db.collection("users").where("email", "==", email);
+    const snapshot = await userRef.get();
+
+    if (!snapshot.empty) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await db.collection("users").add({
+      name,
+      email,
+      password: hashedPassword,
+      role,
+      createdAt: new Date(),
+    });
+
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// LOGIN
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const snapshot = await db
+      .collection("users")
+      .where("email", "==", email)
+      .get();
+
+    if (snapshot.empty) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const userDoc = snapshot.docs[0];
+    const user = userDoc.data();
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    const token = jwt.sign(
+      {
+        id: userDoc.id,
+        role: user.role,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "1d" }
+    );
+
+    res.json({
+      token,
+      role: user.role,
+      name: user.name,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
