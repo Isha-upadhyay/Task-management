@@ -1,8 +1,10 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import RoleSelection from "./pages/RoleSelection";
 import AdminDashboard from "./pages/AdminDashboard";
 import UserDashboard from "./pages/UserDashboard";
+import Tasks from "./pages/Tasks";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
 const PrivateRoute = ({ children, role }) => {
@@ -19,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/role" element={<RoleSelection />} />
 
           <Route
             path="/admin/dashboard"
@@ -30,10 +33,28 @@ function App() {
           />
 
           <Route
+            path="/admin/tasks"
+            element={
+              <PrivateRoute role="admin">
+                <Tasks />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
             path="/user/dashboard"
             element={
               <PrivateRoute role="user">
                 <UserDashboard />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/user/tasks"
+            element={
+              <PrivateRoute role="user">
+                <Tasks />
               </PrivateRoute>
             }
           />
