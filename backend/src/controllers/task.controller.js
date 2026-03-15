@@ -71,7 +71,15 @@ exports.updateStatus = async (req, res) => {
 // EDIT TASK (ADMIN)
 exports.editTask = async (req, res) => {
   try {
-    await db.collection("tasks").doc(req.params.id).update(req.body);
+    const { title, description, assignedTo, status } = req.body;
+    const updateData = {};
+    
+    if (title) updateData.title = title;
+    if (description !== undefined) updateData.description = description;
+    if (assignedTo) updateData.assignedTo = assignedTo;
+    if (status) updateData.status = status;
+
+    await db.collection("tasks").doc(req.params.id).update(updateData);
     res.json({ message: "Task updated" });
   } catch (err) {
     res.status(500).json({ message: err.message });
