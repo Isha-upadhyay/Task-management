@@ -57,11 +57,18 @@ exports.getTasks = async (req, res) => {
 exports.updateStatus = async (req, res) => {
   try {
     const { status } = req.body;
+    const taskRef = db.collection("tasks").doc(req.params.id);
+    const doc = await taskRef.get();
+    
+    if (!doc.exists) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+    
+    if (req.user.role !== "admin" && doc.data().assignedTo !== req.user.id) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
 
-    await db.collection("tasks").doc(req.params.id).update({
-      status,
-    });
-
+    await taskRef.update({ status });
     res.json({ message: "Status updated" });
   } catch (err) {
     res.status(500).json({ message: err.message });
